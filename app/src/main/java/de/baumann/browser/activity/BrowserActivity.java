@@ -226,6 +226,7 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
         initOmnibox();
         initSearchPanel();
         initOverview();
+        hideOmnibox();
 
         new AdBlock(context);
         new Javascript(context);
@@ -1340,15 +1341,9 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
                 int webViewHeight = ninjaWebView.getHeight();
                 int cutoff = height - webViewHeight - 112 * Math.round(getResources().getDisplayMetrics().density);
                 if (scrollY > oldScrollY && cutoff >= scrollY) {
-                    if (!searchOnSite)  {
-                        fab_imageButtonNav.setVisibility(View.VISIBLE);
-                        searchPanel.setVisibility(View.GONE);
-                        omnibox.setVisibility(View.GONE);
-                        omniboxTitle.setVisibility(View.GONE);
-                        appBar.setVisibility(View.GONE);
-                    }
+                    hideOmnibox();
                 } else if (scrollY < oldScrollY){
-                    showOmnibox();
+//                    showOmnibox();
                 }
             });
         }
@@ -1558,6 +1553,16 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
             omnibox.setVisibility(View.VISIBLE);
             omniboxTitle.setVisibility(View.VISIBLE);
             appBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideOmnibox() {
+        if (!searchOnSite)  {
+            fab_imageButtonNav.setVisibility(View.VISIBLE);
+            searchPanel.setVisibility(View.GONE);
+            omnibox.setVisibility(View.GONE);
+            omniboxTitle.setVisibility(View.GONE);
+            appBar.setVisibility(View.GONE);
         }
     }
 
