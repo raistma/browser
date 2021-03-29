@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Browser.iml" filepath="$PROJECT_DIR$/Browser.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/browser.iml" filepath="$PROJECT_DIR$/browser.iml" group="browser" />
+      <module fileurl="file://$PROJECT_DIR$/app/browser-app.iml" filepath="$PROJECT_DIR$/app/browser-app.iml" group="browser/app" />
     </modules>
   </component>
 </project>

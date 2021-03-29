@@ -2,6 +2,7 @@ package de.baumann.browser.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DownloadManager;
 
 import android.app.SearchManager;
@@ -9,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -35,6 +37,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1615,13 +1618,13 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
             }
         });
 
-        final GridView menu_grid_tab = view.findViewById(R.id.menu_grid_tab);
-        final GridView menu_grid_share = view.findViewById(R.id.menu_grid_share);
-        final GridView menu_grid_save = view.findViewById(R.id.menu_grid_save);
+//        final GridView menu_grid_tab = view.findViewById(R.id.menu_grid_tab);
+//        final GridView menu_grid_share = view.findViewById(R.id.menu_grid_share);
+//        final GridView menu_grid_save = view.findViewById(R.id.menu_grid_save);
         final GridView menu_grid_other = view.findViewById(R.id.menu_grid_other);
-        final View floatButton_tabView = view.findViewById(R.id.floatButton_tabView);
-        final View floatButton_shareView = view.findViewById(R.id.floatButton_shareView);
-        final View floatButton_saveView = view.findViewById(R.id.floatButton_saveView);
+//        final View floatButton_tabView = view.findViewById(R.id.floatButton_tabView);
+//        final View floatButton_shareView = view.findViewById(R.id.floatButton_shareView);
+//        final View floatButton_saveView = view.findViewById(R.id.floatButton_saveView);
         final View floatButton_moreView = view.findViewById(R.id.floatButton_moreView);
 
         int orientation = this.getResources().getConfiguration().orientation;
@@ -1632,154 +1635,154 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
             numberColumns = 2;
         }
 
-        menu_grid_tab.setVisibility(View.VISIBLE);
-        menu_grid_share.setVisibility(View.GONE);
-        menu_grid_save.setVisibility(View.GONE);
-        menu_grid_other.setVisibility(View.GONE);
+//        menu_grid_tab.setVisibility(View.GONE);
+//        menu_grid_share.setVisibility(View.GONE);
+//        menu_grid_save.setVisibility(View.GONE);
+        menu_grid_other.setVisibility(View.VISIBLE);
 
-        menu_grid_tab.setNumColumns(numberColumns);
-        menu_grid_share.setNumColumns(numberColumns);
-        menu_grid_save.setNumColumns(numberColumns);
+//        menu_grid_tab.setNumColumns(numberColumns);
+//        menu_grid_share.setNumColumns(numberColumns);
+//        menu_grid_save.setNumColumns(numberColumns);
         menu_grid_other.setNumColumns(numberColumns);
 
-        floatButton_tabView.setVisibility(View.VISIBLE);
-        floatButton_shareView.setVisibility(View.GONE);
-        floatButton_saveView.setVisibility(View.GONE);
-        floatButton_moreView.setVisibility(View.GONE);
+//        floatButton_tabView.setVisibility(View.GONE);
+//        floatButton_shareView.setVisibility(View.GONE);
+//        floatButton_saveView.setVisibility(View.GONE);
+        floatButton_moreView.setVisibility(View.VISIBLE);
 
         // Tab
-        GridItem item_01 = new GridItem(R.drawable.icon_preview, getString(R.string.main_menu_tabPreview), 0);
-        GridItem item_02 = new GridItem(R.drawable.icon_tab_plus, getString(R.string.main_menu_new_tabOpen),  0);
-        GridItem item_03 = new GridItem(R.drawable.star_grey, getString(R.string.menu_openFav),  0);
-        GridItem item_04 = new GridItem(R.drawable.icon_close, getString(R.string.menu_closeTab),  0);
-        GridItem item_05 = new GridItem(R.drawable.icon_exit, getString(R.string.menu_quit),  0);
-
-        final List<GridItem> gridList_tab = new LinkedList<>();
-        gridList_tab.add(gridList_tab.size(), item_01);
-        gridList_tab.add(gridList_tab.size(), item_02);
-        gridList_tab.add(gridList_tab.size(), item_03);
-        gridList_tab.add(gridList_tab.size(), item_04);
-        gridList_tab.add(gridList_tab.size(), item_05);
-
-        GridAdapter gridAdapter_tab = new GridAdapter(context, gridList_tab);
-        menu_grid_tab.setAdapter(gridAdapter_tab);
-        gridAdapter_tab.notifyDataSetChanged();
-
-        menu_grid_tab.setOnItemClickListener((parent, view14, position, id) -> {
-            if (position == 0) {
-                dialog_overview.cancel();
-                showOverview();
-            } else if (position == 1) {
-                dialog_overview.cancel();
-                addAlbum(getString(R.string.app_name), sp.getString("favoriteURL", "https://github.com/scoute-dich/browser"), true);
-            } else if (position == 2) {
-                dialog_overview.cancel();
-                updateAlbum(sp.getString("favoriteURL", "https://github.com/scoute-dich/browser"));
-            } else if (position == 3) {
-                removeAlbum(currentAlbumController);
-                dialog_overview.cancel();
-            } else if (position == 4) {
-                dialog_overview.cancel();
-                doubleTapsQuit();
-            }
-        });
+//        GridItem item_01 = new GridItem(R.drawable.icon_preview, getString(R.string.main_menu_tabPreview), 0);
+//        GridItem item_02 = new GridItem(R.drawable.icon_tab_plus, getString(R.string.main_menu_new_tabOpen),  0);
+//        GridItem item_03 = new GridItem(R.drawable.star_grey, getString(R.string.menu_openFav),  0);
+//        GridItem item_04 = new GridItem(R.drawable.icon_close, getString(R.string.menu_closeTab),  0);
+//        GridItem item_05 = new GridItem(R.drawable.icon_exit, getString(R.string.menu_quit),  0);
+//
+//        final List<GridItem> gridList_tab = new LinkedList<>();
+//        gridList_tab.add(gridList_tab.size(), item_01);
+//        gridList_tab.add(gridList_tab.size(), item_02);
+//        gridList_tab.add(gridList_tab.size(), item_03);
+//        gridList_tab.add(gridList_tab.size(), item_04);
+//        gridList_tab.add(gridList_tab.size(), item_05);
+//
+//        GridAdapter gridAdapter_tab = new GridAdapter(context, gridList_tab);
+//        menu_grid_tab.setAdapter(gridAdapter_tab);
+//        gridAdapter_tab.notifyDataSetChanged();
+//
+//        menu_grid_tab.setOnItemClickListener((parent, view14, position, id) -> {
+//            if (position == 0) {
+//                dialog_overview.cancel();
+//                showOverview();
+//            } else if (position == 1) {
+//                dialog_overview.cancel();
+//                addAlbum(getString(R.string.app_name), sp.getString("favoriteURL", "https://github.com/scoute-dich/browser"), true);
+//            } else if (position == 2) {
+//                dialog_overview.cancel();
+//                updateAlbum(sp.getString("favoriteURL", "https://github.com/scoute-dich/browser"));
+//            } else if (position == 3) {
+//                removeAlbum(currentAlbumController);
+//                dialog_overview.cancel();
+//            } else if (position == 4) {
+//                dialog_overview.cancel();
+//                doubleTapsQuit();
+//            }
+//        });
 
         // Save
-        GridItem item_21 = new GridItem(R.drawable.star_grey, getString(R.string.menu_fav),  0);
-        GridItem item_22 = new GridItem(R.drawable.icon_earth, getString(R.string.menu_save_home),  0);
-        GridItem item_23 = new GridItem(R.drawable.icon_bookmark, getString(R.string.menu_save_bookmark),  0);
-        GridItem item_24 = new GridItem(R.drawable.icon_document, getString(R.string.menu_save_pdf),  0);
-        GridItem item_25 = new GridItem(R.drawable.link_plus, getString(R.string.menu_sc),  0);
-        GridItem item_26 = new GridItem(R.drawable.icon_menu_save, getString(R.string.menu_save_as),  0);
-
-        final List<GridItem> gridList_save = new LinkedList<>();
-        gridList_save.add(gridList_save.size(), item_21);
-        gridList_save.add(gridList_save.size(), item_22);
-        gridList_save.add(gridList_save.size(), item_23);
-        gridList_save.add(gridList_save.size(), item_24);
-        gridList_save.add(gridList_save.size(), item_25);
-        gridList_save.add(gridList_save.size(), item_26);
-
-        GridAdapter gridAdapter_save = new GridAdapter(context, gridList_save);
-        menu_grid_save.setAdapter(gridAdapter_save);
-        gridAdapter_save.notifyDataSetChanged();
-
-        menu_grid_save.setOnItemClickListener((parent, view13, position, id) -> {
-            RecordAction action = new RecordAction(context);
-            if (position == 0) {
-                dialog_overview.cancel();
-                HelperUnit.setFavorite(context, url);
-            } else if (position == 1) {
-                dialog_overview.cancel();
-                save_atHome(title, url);
-            } else if (position == 2) {
-                dialog_overview.cancel();
-                action.open(true);
-                if (action.checkUrl(url, RecordUnit.TABLE_BOOKMARK)) {
-                    NinjaToast.show(context, getString(R.string.toast_already_exist_in_home));
-                } else {
-                    action.addBookmark(new Record(ninjaWebView.getTitle(), url, System.currentTimeMillis(), 0));
-                    NinjaToast.show(context, getString(R.string.toast_add_to_home_successful));
-                    open_bookmark.performClick();
-                }
-                action.close();
-            } else if (position == 3) {
-                dialog_overview.cancel();
-                printPDF();
-            } else if (position == 4) {
-                dialog_overview.cancel();
-                HelperUnit.createShortcut(context, ninjaWebView.getTitle(), ninjaWebView.getUrl());
-            } else if (position == 5) {
-                dialog_overview.cancel();
-                HelperUnit.save_as(activity, url);
-            }
-        });
+//        GridItem item_21 = new GridItem(R.drawable.star_grey, getString(R.string.menu_fav),  0);
+//        GridItem item_22 = new GridItem(R.drawable.icon_earth, getString(R.string.menu_save_home),  0);
+//        GridItem item_23 = new GridItem(R.drawable.icon_bookmark, getString(R.string.menu_save_bookmark),  0);
+//        GridItem item_24 = new GridItem(R.drawable.icon_document, getString(R.string.menu_save_pdf),  0);
+//        GridItem item_25 = new GridItem(R.drawable.link_plus, getString(R.string.menu_sc),  0);
+//        GridItem item_26 = new GridItem(R.drawable.icon_menu_save, getString(R.string.menu_save_as),  0);
+//
+//        final List<GridItem> gridList_save = new LinkedList<>();
+//        gridList_save.add(gridList_save.size(), item_21);
+//        gridList_save.add(gridList_save.size(), item_22);
+//        gridList_save.add(gridList_save.size(), item_23);
+//        gridList_save.add(gridList_save.size(), item_24);
+//        gridList_save.add(gridList_save.size(), item_25);
+//        gridList_save.add(gridList_save.size(), item_26);
+//
+//        GridAdapter gridAdapter_save = new GridAdapter(context, gridList_save);
+//        menu_grid_save.setAdapter(gridAdapter_save);
+//        gridAdapter_save.notifyDataSetChanged();
+//
+//        menu_grid_save.setOnItemClickListener((parent, view13, position, id) -> {
+//            RecordAction action = new RecordAction(context);
+//            if (position == 0) {
+//                dialog_overview.cancel();
+//                HelperUnit.setFavorite(context, url);
+//            } else if (position == 1) {
+//                dialog_overview.cancel();
+//                save_atHome(title, url);
+//            } else if (position == 2) {
+//                dialog_overview.cancel();
+//                action.open(true);
+//                if (action.checkUrl(url, RecordUnit.TABLE_BOOKMARK)) {
+//                    NinjaToast.show(context, getString(R.string.toast_already_exist_in_home));
+//                } else {
+//                    action.addBookmark(new Record(ninjaWebView.getTitle(), url, System.currentTimeMillis(), 0));
+//                    NinjaToast.show(context, getString(R.string.toast_add_to_home_successful));
+//                    open_bookmark.performClick();
+//                }
+//                action.close();
+//            } else if (position == 3) {
+//                dialog_overview.cancel();
+//                printPDF();
+//            } else if (position == 4) {
+//                dialog_overview.cancel();
+//                HelperUnit.createShortcut(context, ninjaWebView.getTitle(), ninjaWebView.getUrl());
+//            } else if (position == 5) {
+//                dialog_overview.cancel();
+//                HelperUnit.save_as(activity, url);
+//            }
+//        });
 
         // Share
-        GridItem item_11 = new GridItem(R.drawable.icon_menu_share, getString(R.string.menu_share_link),  0);
-        GridItem item_12 = new GridItem(R.drawable.clipboard_outline, getString(R.string.menu_shareClipboard),  0);
-        GridItem item_13 = new GridItem(R.drawable.icon_exit, getString(R.string.menu_open_with),  0);
-
-        final List<GridItem> gridList_share = new LinkedList<>();
-        gridList_share.add(gridList_share.size(), item_11);
-        gridList_share.add(gridList_share.size(), item_12);
-        gridList_share.add(gridList_share.size(), item_13);
-
-        GridAdapter gridAdapter_share = new GridAdapter(context, gridList_share);
-        menu_grid_share.setAdapter(gridAdapter_share);
-        gridAdapter_share.notifyDataSetChanged();
-
-        menu_grid_share.setOnItemClickListener((parent, view12, position, id) -> {
-            if (position == 0) {
-                dialog_overview.cancel();
-                if (prepareRecord()) {
-                    NinjaToast.show(context, getString(R.string.toast_share_failed));
-                } else {
-                    shareLink(title, url);
-                }
-            } else if (position == 1) {
-                dialog_overview.cancel();
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("text", url);
-                Objects.requireNonNull(clipboard).setPrimaryClip(clip);
-                NinjaToast.show(context, R.string.toast_copy_successful);
-            } else if (position == 2) {
-                dialog_overview.cancel();
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                Intent chooser = Intent.createChooser(intent, getString(R.string.menu_open_with));
-                startActivity(chooser);
-            }
-        });
+//        GridItem item_11 = new GridItem(R.drawable.icon_menu_share, getString(R.string.menu_share_link),  0);
+//        GridItem item_12 = new GridItem(R.drawable.clipboard_outline, getString(R.string.menu_shareClipboard),  0);
+//        GridItem item_13 = new GridItem(R.drawable.icon_exit, getString(R.string.menu_open_with),  0);
+//
+//        final List<GridItem> gridList_share = new LinkedList<>();
+//        gridList_share.add(gridList_share.size(), item_11);
+//        gridList_share.add(gridList_share.size(), item_12);
+//        gridList_share.add(gridList_share.size(), item_13);
+//
+//        GridAdapter gridAdapter_share = new GridAdapter(context, gridList_share);
+//        menu_grid_share.setAdapter(gridAdapter_share);
+//        gridAdapter_share.notifyDataSetChanged();
+//
+//        menu_grid_share.setOnItemClickListener((parent, view12, position, id) -> {
+//            if (position == 0) {
+//                dialog_overview.cancel();
+//                if (prepareRecord()) {
+//                    NinjaToast.show(context, getString(R.string.toast_share_failed));
+//                } else {
+//                    shareLink(title, url);
+//                }
+//            } else if (position == 1) {
+//                dialog_overview.cancel();
+//                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+//                ClipData clip = ClipData.newPlainText("text", url);
+//                Objects.requireNonNull(clipboard).setPrimaryClip(clip);
+//                NinjaToast.show(context, R.string.toast_copy_successful);
+//            } else if (position == 2) {
+//                dialog_overview.cancel();
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(url));
+//                Intent chooser = Intent.createChooser(intent, getString(R.string.menu_open_with));
+//                startActivity(chooser);
+//            }
+//        });
 
         // Other
-        GridItem item_31 = new GridItem(R.drawable.icon_search, getString(R.string.menu_other_searchSite),  0);
-        GridItem item_32 = new GridItem(R.drawable.icon_download, getString(R.string.menu_download),  0);
+//        GridItem item_31 = new GridItem(R.drawable.icon_search, getString(R.string.menu_other_searchSite),  0);
+//        GridItem item_32 = new GridItem(R.drawable.icon_download, getString(R.string.menu_download),  0);
         GridItem item_33 = new GridItem(R.drawable.icon_settings, getString(R.string.setting_label),  0);
 
         final List<GridItem> gridList_other = new LinkedList<>();
-        gridList_other.add(gridList_other.size(), item_31);
-        gridList_other.add(gridList_other.size(), item_32);
+//        gridList_other.add(gridList_other.size(), item_31);
+//        gridList_other.add(gridList_other.size(), item_32);
         gridList_other.add(gridList_other.size(), item_33);
 
         GridAdapter gridAdapter_other = new GridAdapter(context, gridList_other);
@@ -1787,73 +1790,75 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
         gridAdapter_other.notifyDataSetChanged();
 
         menu_grid_other.setOnItemClickListener((parent, view1, position, id) -> {
-            if (position == 0) {
+//            if (position == 0) {
+//                dialog_overview.cancel();
+//                searchOnSite = true;
+//                fab_imageButtonNav.setVisibility(View.GONE);
+//                omnibox.setVisibility(View.GONE);
+//                searchPanel.setVisibility(View.VISIBLE);
+//                omniboxTitle.setVisibility(View.GONE);
+//                appBar.setVisibility(View.VISIBLE);
+//            } else if (position == 1) {
+//                dialog_overview.cancel();
+//                startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
+//            } else
+                if (position == 0) {
                 dialog_overview.cancel();
-                searchOnSite = true;
-                fab_imageButtonNav.setVisibility(View.GONE);
-                omnibox.setVisibility(View.GONE);
-                searchPanel.setVisibility(View.VISIBLE);
-                omniboxTitle.setVisibility(View.GONE);
-                appBar.setVisibility(View.VISIBLE);
-            } else if (position == 1) {
-                dialog_overview.cancel();
-                startActivity(new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS));
-            } else if (position == 2) {
-                dialog_overview.cancel();
-                Intent settings = new Intent(BrowserActivity.this, Settings_Activity.class);
-                startActivity(settings);
+                showInputDialog();
+//                Intent settings = new Intent(BrowserActivity.this, Settings_Activity.class);
+//                startActivity(settings);
             }
         });
 
-        ImageButton fab_tab = view.findViewById(R.id.floatButton_tab);
-        fab_tab.setOnClickListener(v -> {
-            menu_grid_tab.setVisibility(View.VISIBLE);
-            menu_grid_share.setVisibility(View.GONE);
-            menu_grid_save.setVisibility(View.GONE);
-            menu_grid_other.setVisibility(View.GONE);
+//        ImageButton fab_tab = view.findViewById(R.id.floatButton_tab);
+//        fab_tab.setOnClickListener(v -> {
+//            menu_grid_tab.setVisibility(View.VISIBLE);
+//            menu_grid_share.setVisibility(View.GONE);
+//            menu_grid_save.setVisibility(View.GONE);
+//            menu_grid_other.setVisibility(View.GONE);
+//
+//            floatButton_tabView.setVisibility(View.VISIBLE);
+//            floatButton_shareView.setVisibility(View.GONE);
+//            floatButton_saveView.setVisibility(View.GONE);
+//            floatButton_moreView.setVisibility(View.GONE);
+//        });
 
-            floatButton_tabView.setVisibility(View.VISIBLE);
-            floatButton_shareView.setVisibility(View.GONE);
-            floatButton_saveView.setVisibility(View.GONE);
-            floatButton_moreView.setVisibility(View.GONE);
-        });
+//        ImageButton fab_share = view.findViewById(R.id.floatButton_share);
+//        fab_share.setOnClickListener(v -> {
+//            menu_grid_tab.setVisibility(View.GONE);
+//            menu_grid_share.setVisibility(View.VISIBLE);
+//            menu_grid_save.setVisibility(View.GONE);
+//            menu_grid_other.setVisibility(View.GONE);
+//
+//            floatButton_tabView.setVisibility(View.GONE);
+//            floatButton_shareView.setVisibility(View.VISIBLE);
+//            floatButton_saveView.setVisibility(View.GONE);
+//            floatButton_moreView.setVisibility(View.GONE);
+//        });
 
-        ImageButton fab_share = view.findViewById(R.id.floatButton_share);
-        fab_share.setOnClickListener(v -> {
-            menu_grid_tab.setVisibility(View.GONE);
-            menu_grid_share.setVisibility(View.VISIBLE);
-            menu_grid_save.setVisibility(View.GONE);
-            menu_grid_other.setVisibility(View.GONE);
-
-            floatButton_tabView.setVisibility(View.GONE);
-            floatButton_shareView.setVisibility(View.VISIBLE);
-            floatButton_saveView.setVisibility(View.GONE);
-            floatButton_moreView.setVisibility(View.GONE);
-        });
-
-        ImageButton fab_save = view.findViewById(R.id.floatButton_save);
-        fab_save.setOnClickListener(v -> {
-            menu_grid_tab.setVisibility(View.GONE);
-            menu_grid_share.setVisibility(View.GONE);
-            menu_grid_save.setVisibility(View.VISIBLE);
-            menu_grid_other.setVisibility(View.GONE);
-
-            floatButton_tabView.setVisibility(View.GONE);
-            floatButton_shareView.setVisibility(View.GONE);
-            floatButton_saveView.setVisibility(View.VISIBLE);
-            floatButton_moreView.setVisibility(View.GONE);
-        });
+//        ImageButton fab_save = view.findViewById(R.id.floatButton_save);
+//        fab_save.setOnClickListener(v -> {
+//            menu_grid_tab.setVisibility(View.GONE);
+//            menu_grid_share.setVisibility(View.GONE);
+//            menu_grid_save.setVisibility(View.VISIBLE);
+//            menu_grid_other.setVisibility(View.GONE);
+//
+//            floatButton_tabView.setVisibility(View.GONE);
+//            floatButton_shareView.setVisibility(View.GONE);
+//            floatButton_saveView.setVisibility(View.VISIBLE);
+//            floatButton_moreView.setVisibility(View.GONE);
+//        });
 
         ImageButton fab_more = view.findViewById(R.id.floatButton_more);
         fab_more.setOnClickListener(v -> {
-            menu_grid_tab.setVisibility(View.GONE);
-            menu_grid_share.setVisibility(View.GONE);
-            menu_grid_save.setVisibility(View.GONE);
+//            menu_grid_tab.setVisibility(View.GONE);
+//            menu_grid_share.setVisibility(View.GONE);
+//            menu_grid_save.setVisibility(View.GONE);
             menu_grid_other.setVisibility(View.VISIBLE);
 
-            floatButton_tabView.setVisibility(View.GONE);
-            floatButton_shareView.setVisibility(View.GONE);
-            floatButton_saveView.setVisibility(View.GONE);
+//            floatButton_tabView.setVisibility(View.GONE);
+//            floatButton_shareView.setVisibility(View.GONE);
+//            floatButton_saveView.setVisibility(View.GONE);
             floatButton_moreView.setVisibility(View.VISIBLE);
         });
 
@@ -2079,5 +2084,38 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
             }
         }
         return list.get(index);
+    }
+
+    protected void showInputDialog() {
+
+        // get prompts.xml view
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View promptView = layoutInflater.inflate(R.layout.pin_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText editText = (EditText) promptView.findViewById(R.id.edittext);
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        if("1234".equals(editText.getText().toString())) {
+                            Intent settings = new Intent(BrowserActivity.this, Settings_Activity.class);
+                            startActivity(settings);
+                        }
+//                        resultText.setText("Hello, " + editText.getText());
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 }
